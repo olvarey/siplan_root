@@ -18,8 +18,9 @@ class Accion(models.Model):
     observacion = models.CharField(max_length=500, blank=True, null=True)
     presupuesto_asignado_accion = models.FloatField(blank=True, null=True)
     usuario_creacion_accion = models.CharField(max_length=300)
-    id_anio = models.ForeignKey("AnioResultado", models.RESTRICT, db_column="id_anio")
-    id_resultado = models.BigIntegerField()
+    id_anio_resultado = models.ForeignKey(
+        "AnioResultado", models.RESTRICT, db_column="id_anio_resultado"
+    )
     id_financiamiento = models.ForeignKey(
         "Financiamiento", models.RESTRICT, db_column="id_financiamiento"
     )
@@ -44,9 +45,8 @@ class Anio(models.Model):
 
 
 class AnioResultado(models.Model):
-    id_anio = models.OneToOneField(
-        Anio, models.RESTRICT, db_column="id_anio", primary_key=True
-    )
+    id_anio_resultado = models.BigAutoField(primary_key=True)
+    id_anio = models.ForeignKey("Anio", models.RESTRICT, db_column="id_anio")
     id_resultado = models.ForeignKey(
         "Resultado", models.RESTRICT, db_column="id_resultado"
     )
@@ -195,10 +195,9 @@ class Resultado(models.Model):
 
 
 class Seguimiento(models.Model):
-    id_accion = models.OneToOneField(
-        Accion, models.RESTRICT, db_column="id_accion", primary_key=True
-    )
-    id_mes = models.ForeignKey(Mes, models.RESTRICT, db_column="id_mes")
+    id_seguimiento = models.AutoField(primary_key=True)
+    id_accion = models.ForeignKey("Accion", models.RESTRICT, db_column="id_accion")
+    id_mes = models.ForeignKey("Mes", models.RESTRICT, db_column="id_mes")
     detalle_seguimiento = models.CharField(max_length=500)
     ejecutado = models.BooleanField(blank=True, null=True)
     fecha_creacion_seguimiento = models.DateField()
