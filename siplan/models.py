@@ -268,13 +268,15 @@ class UnidadOrganizativa(models.Model):
     nombre_unidad_organizativa = models.CharField(
         max_length=500, verbose_name="Nombre unidad organizativa"
     )
-    id_organizacion = models.ForeignKey(
+    organizacion = models.ForeignKey(
         Organizacion,
         models.RESTRICT,
         db_column="id_organizacion",
         verbose_name="Organización",
+        # @olvarey This is related with OrganizacionSerializer
+        # related_name="unidades_organizativas",
     )
-    id_unidad_superior = models.ForeignKey(
+    unidad_superior = models.ForeignKey(
         "self",
         models.RESTRICT,
         db_column="id_unidad_superior",
