@@ -83,7 +83,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "SIPLAN",
         "USER": "postgres",
-        "PASSWORD": "Fathima13$",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "5432",
     }
